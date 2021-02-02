@@ -52,7 +52,7 @@ apt-get install -y --no-install-recommends \
     libclang-$LLVM_INSTALL_VERSION-dev
 
 # create symlinks for all LLVM tools to allow generic scripts to use them
-find /usr/bin -type f -name "*-$LLVM_INSTALL_VERSION" | while read source; do
+find /usr/bin -name "*-$LLVM_INSTALL_VERSION" | while read source; do
     destination=$(printf "$source" | sed -E "s/-$LLVM_INSTALL_VERSION$//")
 
     if [ ! -e $destination ]; then
