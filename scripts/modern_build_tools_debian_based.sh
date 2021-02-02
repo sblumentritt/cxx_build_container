@@ -24,11 +24,6 @@ if [ "$#" -gt 2 ]; then
     CPPCHECK_INSTALL_VERSION=$3
 fi
 
-echo "$LLVM_INSTALL_VERSION"
-echo "$CMAKE_INSTALL_VERSION"
-echo "$CMAKE_BASE_VERSION"
-echo "$CPPCHECK_INSTALL_VERSION"
-
 # install dependencies for the tools which will be installed manually
 apt-get update
 apt-get install -y --no-install-recommends \
