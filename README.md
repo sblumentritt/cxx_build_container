@@ -19,10 +19,8 @@ operating systems with newer tools.
 
 ## TODO
 
-- move the installation logic of newer software into a shell script to share it
-- create symlinks for the LLVM tools which are suffix with a number
-- add container files for other Debian and Ubuntu version
 - add a newer version of Doxygen into the container
+- find a way to use `COPY`/`ADD` instead of the `wget` workaround
 
 ## License
 
