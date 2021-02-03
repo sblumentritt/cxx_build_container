@@ -1,6 +1,6 @@
 FROM docker.io/amd64/ubuntu:bionic as base
 
-LABEL Description="Image is used to compile source code in other operating systems with newer sofware"
+LABEL Description="Image is used to compile source code in other operating systems with newer software"
 LABEL Maintainer="Sebastian Blumentritt blumentritt.sebastian@gmail.com"
 LABEL Version="0.1.0"
 
@@ -30,7 +30,7 @@ RUN wget --no-check-certificate -qO /tmp/tools_handler.sh \
     $CPPCHECK_INSTALL_VERSION \
     && rm -f /tmp/tools_handler.sh
 
-# define default compiler environement variables
+# define default compiler environment variables
 ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
@@ -48,7 +48,7 @@ USER $USER_NAME:$GROUP_NAME
 # create directory for volume mount
 RUN mkdir -p /home/$USER_NAME/src
 
-# add some convinient aliases
+# add some convenient aliases
 RUN echo 'alias ll="ls -al"\nalias ..="cd .."' >> /home/$USER_NAME/.bashrc
 
 ENV HOME=/home/$USER_NAME
