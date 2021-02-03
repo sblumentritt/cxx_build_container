@@ -14,8 +14,8 @@ operating systems with newer tools.
   `developer` user.
 - Source code should be mounted at `/home/developer/src` which is also the
   default workdir.
-- When using [podman][] to run the containers add `--userns=keep-id` which also
-  the read and write in the mounted volume.
+- When using [podman][] to run the containers add `--userns=keep-id` which
+  allows read and write operations in the mounted volume.
 
 ## TODO
 
