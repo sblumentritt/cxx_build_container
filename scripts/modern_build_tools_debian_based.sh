@@ -52,8 +52,8 @@ apt-get install -y --no-install-recommends \
     libclang-$LLVM_INSTALL_VERSION-dev
 
 # create symlinks for all LLVM tools to allow generic scripts to use them
-find /usr/bin -name "*-$LLVM_INSTALL_VERSION" | while read source; do
-    destination=$(printf "$source" | sed -E "s/-$LLVM_INSTALL_VERSION$//")
+find /usr/bin -name "*-$LLVM_INSTALL_VERSION" | while read -r source; do
+    destination=$(printf "%s" "$source" | sed -E "s/-$LLVM_INSTALL_VERSION$//")
 
     if [ ! -e $destination ]; then
         ln -sf "$source" "$destination"
@@ -72,20 +72,21 @@ wget -qO - \
     "https://github.com/danmar/cppcheck/archive/$CPPCHECK_INSTALL_VERSION.tar.gz" | \
     tar -xz -C /tmp
 
-cd /tmp/cppcheck-$CPPCHECK_INSTALL_VERSION
+# use subshell to avoid having to 'cd' back
+(
+    cd /tmp/cppcheck-$CPPCHECK_INSTALL_VERSION || exit
 
-cmake -S . -B ./build \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_C_COMPILER=clang-$LLVM_INSTALL_VERSION \
-        -DCMAKE_CXX_COMPILER=clang++-$LLVM_INSTALL_VERSION \
-        -DUSE_CLANG=ON \
-        -DHAVE_RULES=ON
+    cmake -S . -B ./build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_C_COMPILER=clang-$LLVM_INSTALL_VERSION \
+            -DCMAKE_CXX_COMPILER=clang++-$LLVM_INSTALL_VERSION \
+            -DUSE_CLANG=ON \
+            -DHAVE_RULES=ON
 
-cmake --build ./build -j
-CFGDIR=/usr/share/Cppcheck HAVE_RULES=yes cmake --build ./build --target install
-
-cd -
+    cmake --build ./build -j
+    CFGDIR=/usr/share/Cppcheck HAVE_RULES=yes cmake --build ./build --target install
+)
 rm -rf /tmp/cppcheck*
 
 # clean up container
