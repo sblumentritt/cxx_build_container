@@ -1,4 +1,4 @@
-FROM docker.io/amd64/debian:buster-slim as base
+FROM docker.io/amd64/ubuntu:bionic as base
 
 LABEL Description="Image is used to compile source code in other operating systems with newer software"
 LABEL Maintainer="Sebastian Blumentritt blumentritt.sebastian@gmail.com"
@@ -21,10 +21,8 @@ ARG LLVM_INSTALL_VERSION=11
 ARG CMAKE_INSTALL_VERSION=3.19.4
 ARG CPPCHECK_INSTALL_VERSION=2.3
 
-# NOTE: was unable to get the COPY to work with podman therefore the script is downloaded via wget
-RUN wget --no-check-certificate -qO /tmp/tools_handler.sh \
-    https://raw.githubusercontent.com/sblumentritt/cxx_build_container/develop/scripts/modern_build_tools_debian_based.sh \
-    && chmod +x /tmp/tools_handler.sh && /tmp/tools_handler.sh \
+COPY ./scripts/modern_build_tools_debian_based.sh /tmp/tools_handler.sh
+RUN /tmp/tools_handler.sh \
     $LLVM_INSTALL_VERSION \
     $CMAKE_INSTALL_VERSION \
     $CPPCHECK_INSTALL_VERSION \

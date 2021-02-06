@@ -24,7 +24,6 @@ operating systems with newer tools.
 ## TODO
 
 - add a newer version of Doxygen into the container
-- find a way to use `COPY`/`ADD` instead of the `wget` workaround
 
 ## License
 
