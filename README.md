@@ -3,7 +3,11 @@
 This repository holds container files to compile source code on other Linux
 operating systems with newer tools.
 
-[[_TOC_]]
+## Table of Contents
+
+* [Usage](#usage)
+* [TODO](#todo)
+* [License](#license)
 
 > The container files are only tested with [podman][] but should also work with
 > [Docker][].
