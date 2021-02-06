@@ -23,7 +23,7 @@ ARG CPPCHECK_INSTALL_VERSION=2.3
 
 # NOTE: was unable to get the COPY to work with podman therefore the script is downloaded via wget
 RUN wget --no-check-certificate -qO /tmp/tools_handler.sh \
-    https://gitlab.com/s.blumentritt/cxx_build_container/-/raw/master/scripts/modern_build_tools_debian_based.sh \
+    https://raw.githubusercontent.com/sblumentritt/cxx_build_container/develop/scripts/modern_build_tools_debian_based.sh \
     && chmod +x /tmp/tools_handler.sh && /tmp/tools_handler.sh \
     $LLVM_INSTALL_VERSION \
     $CMAKE_INSTALL_VERSION \
